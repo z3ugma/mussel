@@ -1,0 +1,5 @@
+*.o
+.vagrant/
+venv/
+*.log
+*.pyc
