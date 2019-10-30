@@ -15,19 +15,16 @@ config.vm.network "forwarded_port", guest: 5353, host: 5354
 config.vm.network "forwarded_port", guest: 9080, host: 9081
 
 #config.bindfs.bind_folder "/Users/fred/vagrant-vms/gtm2", "/fetdb"
-config.vm.synced_folder '.', '/fetdb', type: 'nfs'
+config.vm.synced_folder '.', '/mussel',
+  nfs: true
 
 $script = <<SCRIPT
 echo "Provisioning GT.M"
 sudo apt-get update
-sudo apt-get -y install python python-pip git curl
-cd /fetdb
-chmod +x gtminstall
-sudo ./gtminstall
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install python python-pip git curl fis-gtm-6.3-003a inotify-tools
+cd /mussel
+mkdir -p r g j o m
 
-#source /usr/lib/fis-gtm/V6.3-005_x86_64/gtmprofile
-#env | grep ^gtm
-#tree .fis-gtm/
 
 SCRIPT
 
